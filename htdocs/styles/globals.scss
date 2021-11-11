@@ -1,0 +1,21 @@
+@import "utils/reset";
+html,
+body {
+  width: 100%;
+  height: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "palt";
+  font-family: "Oswald", sans-serif;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#__next,
+.wrapper {
+  width: 100%;
+  height: 100%;
+}
