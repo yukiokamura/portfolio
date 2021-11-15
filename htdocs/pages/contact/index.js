@@ -1,13 +1,17 @@
 import GlitchTitle from "../../components/glitchTitle";
 import Head from "next/head";
 import styles from "../../styles/contact.module.scss";
-export default function Contact() {
+import classNames from "classnames";
+export default function Contact(props) {
   return (
-    <div className={styles.wrap}>
-      <Head>
-        <title>CONTACT | ykokmr</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div
+      className={classNames([
+        styles.wrap,
+        {
+          [styles.isActive]: props.isActive,
+        },
+      ])}
+    >
       <div className={styles.wrapInner}>
         <GlitchTitle title={"contact"} />
 

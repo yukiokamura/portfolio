@@ -3,29 +3,41 @@ import GL from "../components/GL/";
 import FPSStats from "react-fps-stats";
 import Head from "next/head";
 import Navigation from "../components/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TextAnimation from "../components/textAnimation";
 import styles from "../styles/home.module.scss";
+import { useRouter } from "next/router";
+import Provider from "./_provider";
 const links = [
   {
     name: "top",
     link: "/",
-    isActive: true,
+    isActive: false,
   },
 
   {
     name: "works",
-    link: "/works/",
+    link: "/works",
     isActive: false,
   },
   {
     name: "contact",
-    link: "/contact/",
+    link: "/contact",
     isActive: false,
   },
 ];
-function MyApp({ Component, pageProps }) {
+
+function MyApp() {
   const [link, setLink] = useState(links);
+  const router = useRouter();
+  //初期化
+  useEffect(() => {
+    const newLink = link.map((e) => {
+      e.isActive = e.link == router.pathname;
+      return e;
+    });
+    setLink(newLink);
+  }, []);
   return (
     <div className="wrapper">
       <Head>
@@ -53,7 +65,7 @@ function MyApp({ Component, pageProps }) {
           setLink(newLink);
         }}
       />
-      <Component {...pageProps} />
+      <Provider link={link} />
       <TextAnimation text="copyright 2021 ykokmr" className={[styles.footer]} />
     </div>
   );

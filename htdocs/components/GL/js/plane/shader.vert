@@ -14,7 +14,7 @@ uniform float size;
 uniform float margin;
 uniform float pattern;
 
-varying vec2 vUv;
+// varying vec2 vUv;
 varying vec3 color;
 highp mat2 rotate(float rad){
     return mat2(cos(rad),sin(rad),-sin(rad),cos(rad));
@@ -23,7 +23,7 @@ highp mat2 rotate(float rad){
 
 void main() {
 
-  vUv =  uv;
+  // vUv =  uv;
 
   vec3 pos = position;
   float u = clamp(uTime - id * .001,0.0,1.0);

@@ -5,6 +5,13 @@
   height: 100%;
   position: relative;
   overflow: hidden;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  &.isActive {
+    display: block;
+  }
   // mix-blend-mode: screen;
 }
 .profile {
@@ -15,7 +22,7 @@
   justify-content: center;
   flex-direction: column;
   position: relative;
-  top: 100px;
+  top: 60px;
 }
 
 .dis {

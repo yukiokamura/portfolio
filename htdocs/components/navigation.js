@@ -17,7 +17,7 @@ export default function Navigation(props) {
                 return (
                   <div
                     key={"nabiname" + u}
-                    style={{ "transition-delay": u * 0.05 + "s" }}
+                    style={{ transitionDelay: u * 0.05 + "s" }}
                   >
                     <span>{t}</span>
                   </div>

@@ -1,22 +1,23 @@
-import Head from "next/head";
-
 import styles from "../styles/index.module.scss";
 import GlitchTitle from "../components/glitchTitle";
+import classNames from "classnames";
 
 export default function Home(props) {
   return (
-    <div className={styles.topWraper}>
-      <Head>
-        <title>ykokmr</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div
+      className={classNames([
+        styles.topWraper,
+        {
+          [styles.isActive]: props.isActive,
+        },
+      ])}
+    >
       <div className={styles.profile}>
         <GlitchTitle title={"Yuki Okamura"} />
         <div className={styles.dis}>
           <p>I'm front developer.</p>
           <p>June 28th 1993</p>
           <p>LOVE : THREE.js / PIXI.js</p>
-
           <p>
             I've been working for{" "}
             <a href="https://balance.bz/" target="_blank">
