@@ -2,6 +2,7 @@ import Camera from "./camera";
 import Renderer from "./renderer";
 import Plane from "./plane";
 import { Scene } from "three";
+import { getGPUTier } from "detect-gpu";
 export default class Controller {
   constructor(dom) {
     this.dom = dom;
@@ -23,10 +24,9 @@ export default class Controller {
     this.camera = new Camera();
 
     this.scene = new Scene();
-
-    this.plane = new Plane(this.scene);
-
+    this.plane = new Plane(15);
     this.scene.add(this.plane);
+
     this.onResize();
     this.update();
   }
@@ -52,7 +52,7 @@ export default class Controller {
 
   update() {
     ++this.t;
-    this.plane.update(this.t);
+    if (this.plane) this.plane.update(this.t);
     this.renderer.render(this.scene, this.camera);
     this.frame = window.requestAnimationFrame(this.update.bind(this));
   }
@@ -61,10 +61,11 @@ export default class Controller {
     this.removeEvents();
     window.cancelAnimationFrame(this.frame);
     this.renderer.dispose();
-    this.plane.destroy();
+    if (this.plane) this.plane.destroy();
   }
 
   changePage(key) {
-    this.plane.changePage(key);
+    console.log(key, this.plane);
+    if (this.plane) this.plane.changePage(key);
   }
 }

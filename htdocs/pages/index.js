@@ -1,8 +1,24 @@
 import styles from "../styles/index.module.scss";
 import GlitchTitle from "../components/glitchTitle";
 import classNames from "classnames";
+import gsap from "gsap";
+import { useEffect, useRef } from "react";
 
 export default function Home(props) {
+  const wrap = useRef(null);
+  useEffect(() => {
+    const tl = gsap.timeline();
+    if (props.hideAnimationDone) {
+      tl.to(wrap.current, 1, {
+        opacity: 0,
+        ease: "expo.out",
+      }).add(props.hideAnimationDone, 2);
+    }
+
+    return (e) => {
+      tl.kill();
+    };
+  }, [props.hideAnimationDone]);
   return (
     <div
       className={classNames([
@@ -11,9 +27,10 @@ export default function Home(props) {
           [styles.isActive]: props.isActive,
         },
       ])}
+      ref={wrap}
     >
       <div className={styles.profile}>
-        <GlitchTitle title={"Yuki Okamura"} />
+        <GlitchTitle title={"Yuki Okamura"} hide={props.hideAnimationDone} />
         <div className={styles.dis}>
           <p>I'm front developer.</p>
           <p>June 28th 1993</p>

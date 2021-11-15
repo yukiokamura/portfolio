@@ -16,16 +16,49 @@ const headInfo = {
   },
 };
 
+const getComp = (name, props) => {
+  if (name == "top") return <Top {...props} />;
+  if (name == "works") return <Works {...props} />;
+  if (name == "contact") return <Contact {...props} />;
+};
+
 export default function Provider(props) {
   const [activeKey, setActiveKey] = useState(null);
+  const [currentCompornent, setCurrentCompornent] = useState({
+    comp: null,
+    name: null,
+  });
+  const [prevCompornent, setPrevCompornent] = useState([]);
   const router = useRouter();
+
+  const hideAnimationDone = (prop) => {
+    console.log("delete!!!", prevCompornent);
+    const newPrev = prevCompornent.filter((_, i) => i != 0);
+    console.log(newPrev);
+    setPrevCompornent(newPrev);
+  };
   useEffect(() => {
     const isActive = props.link.filter((item) => item.isActive);
     if (isActive.length) {
       setActiveKey(isActive[0].name);
-      router.push(isActive[0].link);
     }
   }, [props.link]);
+
+  useEffect(() => {
+    setCurrentCompornent({
+      name: activeKey,
+    });
+  }, [activeKey]);
+
+  useEffect(() => {
+    if (currentCompornent.name) {
+      const newPrev = prevCompornent.filter(
+        (name) => name != currentCompornent.name
+      );
+      setPrevCompornent([...newPrev, currentCompornent.name]);
+    }
+  }, [currentCompornent]);
+
   return (
     <>
       {activeKey && activeKey in headInfo && (
@@ -33,10 +66,14 @@ export default function Provider(props) {
           <title>{headInfo[activeKey].title}</title>
         </Head>
       )}
-
-      <Top isActive={activeKey == "top"} />
-      <Works isActive={activeKey == "works"} />
-      <Contact isActive={activeKey == "contact"} />
+      {prevCompornent.map((name, i) => {
+        return getComp(name, {
+          isActive: true,
+          hideAnimationDone:
+            i == prevCompornent.length - 1 ? null : hideAnimationDone,
+          key: "prevComp" + i,
+        });
+      })}
     </>
   );
 }

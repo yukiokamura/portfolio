@@ -1,9 +1,7 @@
 import {
   Mesh,
   BoxGeometry,
-  MeshBasicMaterial,
   DoubleSide,
-  BufferAttribute,
   RawShaderMaterial,
   InstancedBufferGeometry,
   InstancedBufferAttribute,
@@ -13,12 +11,13 @@ import vs from "./shader.vert";
 import fs from "./shader.frag";
 const lerp = (a, b, t) => a + (b - a) * t;
 const size = 10;
-const u = 17;
+const u = 15;
 const margin = 2;
-const num = u * u * u;
+// const num = u * u * u;
 
 export default class Plane extends Mesh {
-  constructor() {
+  constructor(_num) {
+    const num = _num * _num * _num;
     const originBox = new BoxGeometry(size, size, size);
     const g = new InstancedBufferGeometry();
     g.index = originBox.index;
@@ -100,6 +99,7 @@ export default class Plane extends Mesh {
       z: 0.01,
     };
     this.m = 0;
+    this.num = num;
     this.rotationAni();
   }
 
@@ -131,7 +131,7 @@ export default class Plane extends Mesh {
       this.material.uniforms.margin.value = this.m;
     }
 
-    this.material.uniforms.uTime.value = (t * 0.01) % num;
+    this.material.uniforms.uTime.value = (t * 0.01) % this.num;
   }
 
   rotationAni() {

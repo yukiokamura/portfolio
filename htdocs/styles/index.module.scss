@@ -5,13 +5,16 @@
   height: 100%;
   position: relative;
   overflow: hidden;
-  display: none;
+  // display: none;
   position: absolute;
   top: 0;
   left: 0;
+  transition: opacity 1s;
+  opacity: 1;
   &.isActive {
     display: block;
   }
+
   // mix-blend-mode: screen;
 }
 .profile {

@@ -37,7 +37,7 @@ function MyApp() {
       return e;
     });
     setLink(newLink);
-  }, []);
+  }, [router.pathname]);
   return (
     <div className="wrapper">
       <Head>
@@ -57,12 +57,8 @@ function MyApp() {
       <Navigation
         links={link}
         onClickLink={(key) => {
-          const newLink = link.map((item) => {
-            item.isActive = item.name == key;
-            return item;
-          });
-
-          setLink(newLink);
+          const isActive = link.filter((e) => e.name == key);
+          router.push(isActive[0].link);
         }}
       />
       <Provider link={link} />

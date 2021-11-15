@@ -5,6 +5,13 @@
   font-size: 32px;
   letter-spacing: 0.1em;
   position: relative;
+  &.isGlitchHide p {
+    animation: glitchHide 0.5s $easeInOutCubic;
+    animation-fill-mode: forwards;
+  }
+  &.isGlitch p {
+    animation: glitch 3s $easeInOutCubic 0s infinite;
+  }
   @keyframes glitch {
     0% {
       transform: translateX(0px);
@@ -31,11 +38,37 @@
       opacity: 1;
     }
   }
+  @keyframes glitchHide {
+    0% {
+      transform: translateX(0px);
+      opacity: 1;
+    }
+    1% {
+      transform: translateX(20px);
+      opacity: 1;
+    }
+    2% {
+      transform: translateX(-10px);
+    }
+    3% {
+      transform: translateX(0px);
+      opacity: 1;
+    }
+    96% {
+      opacity: 1;
+    }
+    97% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
   p {
     position: absolute;
     top: 0;
     left: 0;
-    animation: glitch 3s $easeInOutCubic 0s infinite;
+
     &:nth-child(1) {
       position: relative;
       clip-path: polygon(0 0, 100% 0, 100% 25%, 0 25%);

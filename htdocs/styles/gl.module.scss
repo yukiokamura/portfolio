@@ -16,8 +16,9 @@
     content: "";
     background-image: url("../public/img/bg.png");
     background-repeat: repeat;
-    background-size: 15px 15px;
+    background-size: 10px 10px;
     animation: bgAnime 0.1s linear 0s infinite;
+    will-change: background-position;
   }
 
   @keyframes bgAnime {
@@ -25,12 +26,20 @@
       background-position: 0% 0%;
     }
 
-    50% {
+    25% {
       background-position: -100% -100%;
     }
 
-    100% {
+    50% {
+      background-position: 0% 0%;
+    }
+
+    75% {
       background-position: 100% 100%;
+    }
+
+    100% {
+      background-position: 0% 0%;
     }
   }
 }
