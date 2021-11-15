@@ -2,7 +2,7 @@ import styles from "../styles/textAnimation.module.scss";
 import classnames from "classnames";
 import { useEffect, useRef } from "react";
 
-const alphabet = "-abcdefghijklmnopqrstuvwxyz0123456789";
+const alphabet = "!-&$#%(_*abcdefghijklmnopqrstuvwxyz0123456789";
 const alphabetList = alphabet.split("");
 export default function TextAnimation(props) {
   const textEl = useRef(null);
@@ -27,6 +27,7 @@ export default function TextAnimation(props) {
         }
         if (t == " ") return;
         const index = alphabetList.indexOf(t);
+        span.style.opacity = 1;
         span.innerText = alphabetList[index + 1];
       });
     }, 2);

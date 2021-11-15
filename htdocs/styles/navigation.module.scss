@@ -1,0 +1,90 @@
+@import "./variables.scss";
+.navigation {
+  position: absolute;
+  right: 10px;
+  color: #fff;
+  display: flex;
+  height: 100%;
+  flex-flow: column;
+  justify-content: center;
+  z-index: 2;
+}
+
+.navigationItem {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  text-transform: uppercase;
+
+  & + & {
+    margin-top: 40px;
+  }
+  &:hover {
+    .name {
+      span {
+        transform: translateX(0);
+      }
+    }
+    .boxs {
+      transform: rotate(45deg + 180deg);
+      span {
+        transform: rotate(90deg);
+        &:nth-child(1) {
+          transform: rotate(90deg) scale(0);
+        }
+      }
+    }
+  }
+}
+
+.name {
+  overflow: hidden;
+  font-size: 0px;
+  div {
+    display: inline-block;
+    overflow: hidden;
+  }
+  span {
+    font-size: 12px;
+    transition-delay: inherit;
+    transform: translateX(-1em);
+    display: block;
+    transition: transform 1s $easeOutExpo;
+  }
+}
+
+.boxs {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  transform: rotate(45deg);
+  margin-left: 10px;
+  transition: transform 0.5s $easeOutExpo 0.2s;
+  &.is-active {
+    span:nth-child(1) {
+      background-color: rgba(255, 255, 255, 1);
+    }
+  }
+  span {
+    display: block;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    transition: transform 0.5s $easeOutExpo;
+    &:nth-child(1) {
+      width: 4px;
+      height: 4px;
+      transition-delay: 0.1s;
+    }
+    &:nth-child(2) {
+      width: 10px;
+      height: 10px;
+      transition-delay: 0.15s;
+    }
+  }
+}

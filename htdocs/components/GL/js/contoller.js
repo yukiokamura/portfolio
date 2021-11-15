@@ -61,5 +61,10 @@ export default class Controller {
     this.removeEvents();
     window.cancelAnimationFrame(this.frame);
     this.renderer.dispose();
+    this.plane.destroy();
+  }
+
+  changePage(key) {
+    this.plane.changePage(key);
   }
 }
