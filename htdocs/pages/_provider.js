@@ -3,7 +3,7 @@ import Works from "./works";
 import Contact from "./contact/";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 const headInfo = {
   top: {
     title: "ykokmr",
@@ -29,7 +29,6 @@ export default function Provider(props) {
     name: null,
   });
   const [prevCompornent, setPrevCompornent] = useState([]);
-  const router = useRouter();
 
   const hideAnimationDone = (prop) => {
     console.log("delete!!!", prevCompornent);

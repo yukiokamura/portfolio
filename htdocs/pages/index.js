@@ -6,17 +6,21 @@ import { useEffect, useRef } from "react";
 
 export default function Home(props) {
   const wrap = useRef(null);
+  const tl = useRef(null);
   useEffect(() => {
-    const tl = gsap.timeline();
+    if (!tl.current) tl.current = gsap.timeline();
+    else tl.current.kill();
     if (props.hideAnimationDone) {
-      tl.to(wrap.current, 1, {
-        opacity: 0,
-        ease: "expo.out",
-      }).add(props.hideAnimationDone, 2);
+      tl.current
+        .to(wrap.current, 1, {
+          opacity: 0,
+          ease: "expo.out",
+        })
+        .add(props.hideAnimationDone, 2);
     }
 
     return (e) => {
-      tl.kill();
+      tl.current.kill();
     };
   }, [props.hideAnimationDone]);
   return (

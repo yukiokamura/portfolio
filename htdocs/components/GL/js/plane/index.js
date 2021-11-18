@@ -105,32 +105,27 @@ export default class Plane extends Mesh {
 
   update(t) {
     const pattern = this.material.uniforms.pattern.value;
+    const size = Math.min(window.innerWidth, window.innerHeight);
     if (pattern == 0.0) {
       this.rotation.y = t * this.speed.y;
       this.rotation.x = t * this.speed.x;
       this.rotation.z = t * this.speed.z;
-      this.m = lerp(this.m, (Math.sin(t * 0.01) + 1) * 0.5 * 90 + 10, 0.01);
-      this.material.uniforms.margin.value = this.m;
+      this.m = lerp(this.m, Math.sin(t * 0.01) * 10 + 10, 0.01);
     } else if (pattern > 0.0 && pattern <= 1) {
       this.m = lerp(
         this.m,
-        (Math.sin(t * 0.01) + 1) * 0.5 * window.innerWidth * 0.5 * pattern,
+        Math.sin(t * 0.01) * 100 * pattern + size * 0.5,
         0.01
       );
-      this.material.uniforms.margin.value = this.m;
     } else if (pattern > 1) {
       this.m = lerp(
         this.m,
-        (Math.sin(t * 0.01) + 1) *
-          0.5 *
-          window.innerWidth *
-          0.2 *
-          (pattern - 1),
+        Math.sin(t * 0.01) * 100 * (pattern - 1) + size * 0.5,
         0.01
       );
-      this.material.uniforms.margin.value = this.m;
+      // this.material.uniforms.margin.value = this.m;
     }
-
+    this.material.uniforms.margin.value = this.m;
     this.material.uniforms.uTime.value = (t * 0.01) % this.num;
   }
 
